@@ -15,6 +15,10 @@ public class Product : MonoBehaviour
     public static bool placeSeeds;
     public static int whichSeed;
 
+    public static bool isSowing;
+
+    public static int currentProductPrice;
+
    
     private void Start() {
         shop = GameObject.Find("Shop");
@@ -36,7 +40,10 @@ public class Product : MonoBehaviour
         {
             placeSeeds = true;
             whichSeed = id;
-            goldSystem.GetComponent<GoldSystem>().gold -= price;
+            
+            currentProductPrice = price;
+
+            isSowing = true;
         }
     }
 

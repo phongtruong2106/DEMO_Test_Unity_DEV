@@ -15,6 +15,8 @@ public class Shop : MonoBehaviour
     [SerializeField] private GameObject shopWindow;
     [SerializeField] private GameObject[] products;
 
+    public static bool beInShop;
+
     private void Start() {
         for(int i = 0; i <= numberOfProducts; i++)
         {
@@ -26,14 +28,20 @@ public class Shop : MonoBehaviour
     public void OpenShop()
     {
         shopWindow.SetActive(true);
-        
+        beInShop = true;
         Refresh();
     }
     public void CloseShop()
     {
         shopWindow.SetActive(false);
+        beInShop = false;
+    }
 
-        
+    private void Update() {
+        if(Product.isSowing == true)
+        {
+            CloseShop();
+        }
     }
 
     public void Refresh()

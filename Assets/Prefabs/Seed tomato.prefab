@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 876196616237998372}
   - component: {fileID: 1689462667342249194}
   - component: {fileID: 1104874848735250397}
+  - component: {fileID: -4000909767835759686}
   m_Layer: 0
-  m_Name: Field
-  m_TagString: field
+  m_Name: Seed tomato
+  m_TagString: Seed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b10a6dde01ed2d0469cc718bc5d4451d, type: 2}
+  - {fileID: 2100000, guid: e4afe09d5885a804e87a7111ef546add, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,3 +99,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &-4000909767835759686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402677179850229704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9290bb5dc41cd204da0824b3f04216f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  waits: 5
+  crops: {fileID: 6402677179850229704, guid: fc1c7b60aa6186a4eab2dbcec7e3fcd5, type: 3}

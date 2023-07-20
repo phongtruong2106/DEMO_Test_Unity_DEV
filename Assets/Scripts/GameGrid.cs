@@ -5,20 +5,28 @@ using UnityEngine;
 public class GameGrid : MonoBehaviour
 {
     public int columnLength , rowlength;
+    public int fiedsPrice;
     public float x_Space, z_Space;
-
     [SerializeField] private GameObject grass;
     [SerializeField] private GameObject[] currentGrid;
-
-    public bool gotGrid;
-
     [SerializeField] private GameObject hitted;
     [SerializeField] private GameObject field;
-
-
+    [SerializeField] private GameObject goldSystem;
+    public bool gotGrid;
     public bool creatingFields;
 
+    public Texture2D basicCursor, fieldCursor;
+
+    public CursorMode cursorMode = CursorMode.Auto;
+
+    public Vector2 hospot = Vector2.zero;
+
     private RaycastHit _Hit;
+
+
+    private void Awake() {
+        Cursor.SetCursor(basicCursor, hospot, cursorMode);
+    }
 
     private void Start() {
         for(int i = 0 ; i< columnLength*rowlength; i++)
@@ -40,16 +48,23 @@ public class GameGrid : MonoBehaviour
             {
                 if(creatingFields == true)
                 {
-                    if(_Hit.transform.tag == "Grid")
+                    if(_Hit.transform.tag == "Grid" && goldSystem.GetComponent<GoldSystem>().gold >= fiedsPrice)
                     {
                         hitted = _Hit.transform.gameObject;
                         Instantiate(field, hitted.transform.position, Quaternion.identity);
                         Destroy(hitted);
+
+                        goldSystem.GetComponent<GoldSystem>().gold -= fiedsPrice;
                     }
                 }
             }
         }
 
+        //
+        if(creatingFields == true)
+        {
+            Cursor.SetCursor(fieldCursor, hospot, cursorMode);
+        }
     }
 
     public void CreateFields()

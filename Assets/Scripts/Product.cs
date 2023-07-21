@@ -7,6 +7,7 @@ public class Product : MonoBehaviour
 {
     [SerializeField] private GameObject shop;
     [SerializeField] private GameObject goldSystem;
+    private SeedStroge seedStroge;
     public int id;
     public string productName;
     public int price;
@@ -18,17 +19,18 @@ public class Product : MonoBehaviour
     public static bool isSowing;
 
     public static int currentProductPrice;
+    public int purchaseAmount = 10; 
 
    
     private void Start() {
         shop = GameObject.Find("Shop");
-
         goldSystem = GameObject.Find("Gold System");
+        seedStroge = GameObject.Find("Seed Stroge").GetComponent<SeedStroge>(); // Lấy tham chiếu tới SeedStroge từ GameObject
     }
 
     private void Update() {
         nameText.text = "" + productName;
-        priceText.text = price + " $";
+        priceText.text = price + " $ /10";
 
         productName = shop.GetComponent<Shop>().productName[id];
         price = shop.GetComponent<Shop>().price[id];
@@ -36,15 +38,25 @@ public class Product : MonoBehaviour
 
     public void Buy()
     {
-        if(goldSystem.GetComponent<GoldSystem>().gold >= price)
-        {
-            placeSeeds = true;
-            whichSeed = id;
-            
-            currentProductPrice = price;
+        int totalCost = price * purchaseAmount; // Tính tổng số vàng cần phải trả
 
-            isSowing = true;
-        }
+    if (goldSystem.GetComponent<GoldSystem>().gold >= totalCost)
+    {
+        placeSeeds = true;
+        whichSeed = id;
+        currentProductPrice = price;
+
+        isSowing = true;
+
+        // Truyền số lượng sản phẩm mua vào lớp SeedStroge thông qua id
+            seedStroge.seedCount[id] += purchaseAmount;
+
+            // Lặp lại việc mua sản phẩm purchaseAmount lần
+            for (int i = 0; i < purchaseAmount; i++)
+            {
+                goldSystem.GetComponent<GoldSystem>().gold -= price; // Trừ số vàng sau mỗi lần mua
+            }
+
     }
-
+}
 }

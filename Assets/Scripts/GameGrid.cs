@@ -12,7 +12,7 @@ public class GameGrid : MonoBehaviour
     [SerializeField] private GameObject hitted;
     [SerializeField] private GameObject field;
     [SerializeField] private GameObject goldSystem;
-    [SerializeField] private GameObject seed;
+    [SerializeField] private GameObject[] seed;
     public bool gotGrid;
     public bool creatingFields;
 
@@ -23,7 +23,7 @@ public class GameGrid : MonoBehaviour
     public Vector2 hospot = Vector2.zero;
 
     private RaycastHit _Hit;
-
+ 
 
     private void Awake() {
         Cursor.SetCursor(basicCursor, hospot, cursorMode);
@@ -63,7 +63,7 @@ public class GameGrid : MonoBehaviour
                     if(_Hit.transform.tag == "field" && goldSystem.GetComponent<GoldSystem>().gold >= Product.currentProductPrice)
                     {
                         hitted = _Hit.transform.gameObject;
-                        Instantiate(seed, hitted.transform.position, Quaternion.identity);
+                        Instantiate(seed[Product.whichSeed], hitted.transform.position, Quaternion.identity);
                         Destroy(hitted);
 
                         goldSystem.GetComponent<GoldSystem>().gold -= Product.currentProductPrice;

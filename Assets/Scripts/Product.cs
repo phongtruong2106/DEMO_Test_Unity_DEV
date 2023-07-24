@@ -40,23 +40,23 @@ public class Product : MonoBehaviour
     {
         int totalCost = price * purchaseAmount; // Tính tổng số vàng cần phải trả
 
-    if (goldSystem.GetComponent<GoldSystem>().gold >= totalCost)
-    {
-        placeSeeds = true;
-        whichSeed = id;
-        currentProductPrice = price;
+        if (goldSystem.GetComponent<GoldSystem>().gold >= totalCost)
+        {
+             placeSeeds = true;
+             whichSeed = id;
+             currentProductPrice = price;
 
-        isSowing = true;
+            //isSowing = true;
 
-        // Truyền số lượng sản phẩm mua vào lớp SeedStroge thông qua id
-            seedStroge.seedCount[id] += purchaseAmount;
+            // Truyền số lượng sản phẩm mua vào lớp SeedStroge thông qua id
+                seedStroge.seedCount[id] += purchaseAmount;
 
-            // Lặp lại việc mua sản phẩm purchaseAmount lần
-            for (int i = 0; i < purchaseAmount; i++)
-            {
-                goldSystem.GetComponent<GoldSystem>().gold -= price; // Trừ số vàng sau mỗi lần mua
-            }
+                // Lặp lại việc mua sản phẩm purchaseAmount lần
+                for (int i = 0; i < purchaseAmount; i++)
+                {
+                    goldSystem.GetComponent<GoldSystem>().gold -= price; // Trừ số vàng sau mỗi lần mua
+                }
 
+        }
     }
-}
 }

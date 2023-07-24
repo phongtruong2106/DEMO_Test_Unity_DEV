@@ -15,7 +15,11 @@
 
         public static bool beInBarnSeed;
 
+        private BarnSeed barnSeed;
+
+
         private void Start() {
+            barnSeed = FindObjectOfType<BarnSeed>();
             for(int i = 0; i <= numberOfSeed; i++)
             {
                 seed[i].SetActive(false);
@@ -36,7 +40,7 @@
         }
 
         private void Update() {
-            if(Product.isSowing == true)
+            if(BarnSeed.isSowing == true || BarnSeed.isfeed == true)
             {
                 CloseBard();
             }

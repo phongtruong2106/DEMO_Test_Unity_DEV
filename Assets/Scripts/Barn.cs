@@ -4,31 +4,61 @@ using UnityEngine;
 
 public class Barn : MonoBehaviour
 {
-    [SerializeField] private GameObject priceTable;
-
     public int amountOfStorage;
 
     public int[] id;
-    public string[] productName;
-    public int[] count;
-    public int[] sellingPrice;
+    public int[] countProduct;
 
     public int numberOfProducts;
-    public GameObject shop;
-    public GameObject barnWindow;
+    public int pageNumber;
 
+    [SerializeField] private GameObject barnWindow;
+    [SerializeField] private GameObject[] products;
+    [SerializeField] private PriceTable priceTable;
+   
 
     private void Start() {
-        numberOfProducts = 5;
+        for(int i = 0; i <= numberOfProducts; i++)
+            {
+                products[i].SetActive(false);
+            }
+            Refresh();
     }
 
     private void Update() {
-        for(int i = 0; i< amountOfStorage; i++)
+       if(ProductBarn.isSowing == true)
         {
-            sellingPrice[i] = priceTable.GetComponent<PriceTable>().sellingPrice[id[i]];
-            productName[i] = shop.GetComponent<Shop>().productName[id[i]];
+            Close();
         }
     }
+     public void Refresh()
+    {
+        for(int i = 0; i < numberOfProducts; i++)
+        {
+            products[i].SetActive(false);
+        }
+        if(pageNumber == 1)
+        {
+            for(int i =0; i< numberOfProducts; i++)
+            {
+                products[i].GetComponent<ProductBarn>().id = id[i];
+                products[i].SetActive(true);
+            }
+        }
+    }
+
+    public int GetSellingPriceById(int id)
+    {
+        for (int i = 0; i < priceTable.id.Length; i++)
+        {
+            if (priceTable.id[i] == id)
+            {
+                return priceTable.sellingPrice[i];
+            }
+        }
+        return 0; // Nếu không tìm thấy mã số, trả về 0 hoặc giá trị mặc định khác tùy theo yêu cầu
+    }
+
 
     public void Close()
     {

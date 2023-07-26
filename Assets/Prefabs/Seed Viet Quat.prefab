@@ -248,8 +248,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  waits: 1
+  waits: 15
   crops: {fileID: 6402677179850229704, guid: d8e0231b3c5f6d44a993167fe8437ce7, type: 3}
+  deviceFram: {fileID: 0}
   textDisplay: {fileID: 1701379579557234540}
 --- !u!1 &7485956641031508641
 GameObject:

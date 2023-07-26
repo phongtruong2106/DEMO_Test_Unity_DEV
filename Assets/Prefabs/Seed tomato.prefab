@@ -349,6 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  waits: 1
+  waits: 10
   crops: {fileID: 6402677179850229704, guid: fc1c7b60aa6186a4eab2dbcec7e3fcd5, type: 3}
+  deviceFram: {fileID: 0}
   textDisplay: {fileID: 1744928623624563266}

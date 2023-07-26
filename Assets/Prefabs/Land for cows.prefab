@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: -4035991962235630737}
   m_Layer: 0
   m_Name: Land for cows
-  m_TagString: Animal
+  m_TagString: crops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -325,8 +325,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
-  numberOfFruits: 1
+  cropType: 0
+  numberOfFruits: 100
   barn: {fileID: 0}
+  fieldPrefab: {fileID: 6402677179850229704, guid: b2ac532fb3a50124dba5b9143d5a8b14, type: 3}
+  deviceFram: {fileID: 0}
 --- !u!1 &8231198538988935625
 GameObject:
   m_ObjectHideFlags: 0

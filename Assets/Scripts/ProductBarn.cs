@@ -1,8 +1,7 @@
-using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI    ;
+using UnityEngine.UI;
 
 public class ProductBarn : MonoBehaviour
 {
@@ -16,12 +15,14 @@ public class ProductBarn : MonoBehaviour
     public static bool isSowing;
     public int purchaseAmount = 1;
 
-    private void Start() {
+    private void Start()
+    {
         barn = GameObject.Find("Barn");
         priceTable = GameObject.Find("Price Table").GetComponent<PriceTable>(); // Get the PriceTable component
     }
 
-    private void Update() {
+    private void Update()
+    {
         productCount.text = countProduct.ToString();
         countProduct = barn.GetComponent<Barn>().countProduct[id];
     }
@@ -36,7 +37,17 @@ public class ProductBarn : MonoBehaviour
         barn.GetComponent<Barn>().countProduct[id] -= purchaseAmount;
     }
 
-     private int GetSellingPriceById(int id)
+    public void SellAll()
+    {
+        int sellingPrice = GetSellingPriceById(id); // Get the selling price from the PriceTable
+
+        FindObjectOfType<GoldSystem>().gold += (countProduct * sellingPrice); // Sell all products and receive the total amount of gold
+
+        // Set the product count in the barn to 0 (sold all products)
+        barn.GetComponent<Barn>().countProduct[id] = 0;
+    }
+
+    private int GetSellingPriceById(int id)
     {
         for (int i = 0; i < priceTable.id.Length; i++)
         {

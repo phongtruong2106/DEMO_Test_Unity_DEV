@@ -129,6 +129,7 @@ MonoBehaviour:
   id: 1
   numberOfFruits: 40
   barn: {fileID: 0}
+  fieldPrefab: {fileID: 6402677179850229704, guid: b2ac532fb3a50124dba5b9143d5a8b14, type: 3}
 --- !u!1001 &702787442226427282
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class BarnSeed : MonoBehaviour
 {
     [SerializeField] private GameObject seedStroge;
+    [SerializeField] private GameObject seed;
+    [SerializeField] private GameObject animal;
     public int id;
     public static int seedCount; // Số lượng cây trồng trong nhà kho
 
@@ -21,6 +23,7 @@ public class BarnSeed : MonoBehaviour
     private void Start()
     {
         seedStroge = GameObject.Find("Seed Stroge");
+       //id = Product.whichSeed;
     }
     private void Update()
     {
@@ -35,8 +38,9 @@ public class BarnSeed : MonoBehaviour
         { 
             placeSeeds = true;
             isSowing = true;
-            whichSeed = id;   
+            whichSeed = id;  
             // Trừ đi 1 cây trồng khi trồng (Plant) dựa vào id  
+            seed.GetComponent<Seed>().PlantSeed(id);
         }  
     }
      public void Feed()
@@ -48,6 +52,7 @@ public class BarnSeed : MonoBehaviour
             isfeed = true;
             whichSeed = id;   
             // Trừ đi 1 cây trồng khi trồng (Plant) dựa vào id  
+            animal.GetComponent<Animal>().FeedSeed(id);  
         }  
     }
 }

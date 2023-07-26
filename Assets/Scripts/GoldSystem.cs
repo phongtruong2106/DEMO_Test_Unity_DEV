@@ -11,5 +11,6 @@ public class GoldSystem : MonoBehaviour
 
     private void Update() {
         goldText.text = gold + "$";
+        
     }
 }

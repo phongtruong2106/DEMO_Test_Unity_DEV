@@ -69,6 +69,5 @@
                 seed[i].SetActive(true);
             }
         }
-    }
-       
-    }
+    }   
+}

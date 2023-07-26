@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 8942933763378248800}
   m_Layer: 0
   m_Name: cows Product
-  m_TagString: crops
+  m_TagString: SeedAnimal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -324,5 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
-  waits: 1
+  waits: 30
   crops: {fileID: 6402677179850229704, guid: f19a9da6c697d8542ad7bca704739124, type: 3}
+  deviceFram: {fileID: 0}
+  cropType: 0

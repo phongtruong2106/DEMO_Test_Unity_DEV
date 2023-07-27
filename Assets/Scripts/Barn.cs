@@ -69,4 +69,24 @@ public class Barn : MonoBehaviour
     {
         barnWindow.SetActive(true);
     }
+    public void UpdateProductCount(int id, int newCount)
+    {
+        countProduct[id] = newCount;
+    }
+    public void SaveCountProduct()
+    {
+        for (int i = 0; i < numberOfProducts; i++)
+        {
+            PlayerPrefs.SetInt("Barn_CountProduct_" + i, countProduct[i]);
+        }
+    }
+
+    public void LoadCountProduct()
+    {
+        for (int i = 0; i < numberOfProducts; i++)
+        {
+            countProduct[i] = PlayerPrefs.GetInt("Barn_CountProduct_" + i, 0);
+        }
+    }
+    
 }

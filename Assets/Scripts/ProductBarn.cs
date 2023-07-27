@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ProductBarn : MonoBehaviour
 {
+
     [SerializeField] private GameObject barn;
     [SerializeField] private PriceTable priceTable;
     public int id;
@@ -25,6 +26,7 @@ public class ProductBarn : MonoBehaviour
     {
         productCount.text = countProduct.ToString();
         countProduct = barn.GetComponent<Barn>().countProduct[id];
+        barn.GetComponent<Barn>().UpdateProductCount(id, countProduct);
     }
 
     public void Sell()
@@ -39,12 +41,16 @@ public class ProductBarn : MonoBehaviour
 
     public void SellAll()
     {
-        int sellingPrice = GetSellingPriceById(id); // Get the selling price from the PriceTable
+        if(countProduct > 0)
+        {
+            int sellingPrice = GetSellingPriceById(id); // Get the selling price from the PriceTable
 
-        FindObjectOfType<GoldSystem>().gold += (countProduct * sellingPrice); // Sell all products and receive the total amount of gold
+            FindObjectOfType<GoldSystem>().gold += (countProduct * sellingPrice); // Sell all products and receive the total amount of gold
 
-        // Set the product count in the barn to 0 (sold all products)
-        barn.GetComponent<Barn>().countProduct[id] = 0;
+            // Set the product count in the barn to 0 (sold all products)
+            barn.GetComponent<Barn>().countProduct[id] = 0;
+        }
+        
     }
 
     private int GetSellingPriceById(int id)

@@ -10,7 +10,7 @@ public class Seed : MonoBehaviour
     [SerializeField] private GameObject crops; 
     [SerializeField] private GameObject deviceFram;
     [SerializeField] private TMP_Text textDisplay;
-    public int cropType; 
+    public int seedType; 
     public static int waitCount = 40;
     private int counter = 0;
     private float waitUpgrade;
@@ -21,7 +21,8 @@ public class Seed : MonoBehaviour
           deviceFram = GameObject.Find("Fram Device");
           //id = Product.whichSeed;
           StartCoroutine(Wait());
-          cropType = id;
+          seedType = id;
+          seedType = Animal.instance.animalType;
      }
 
     private IEnumerator Wait()

@@ -5,6 +5,7 @@ using TMPro;
 
 public class Animal : MonoBehaviour
 {
+    public static Animal instance {get; private set;}
     public int id;
     public float waits = 5f;
     [SerializeField] private GameObject crops;
@@ -13,14 +14,15 @@ public class Animal : MonoBehaviour
     private int counter = 0;
     private Coroutine waitCoroutine;
     private float waitUpgrade;
-    public int cropType; 
+    public int animalType; 
 
     private void Start()
     {
         deviceFram = GameObject.Find("Fram Device");
         //id = Product.whichSeed;
         waitCoroutine = StartCoroutine(Wait());
-        cropType = id;
+        
+        animalType = id;
     }
 
     private IEnumerator Wait()

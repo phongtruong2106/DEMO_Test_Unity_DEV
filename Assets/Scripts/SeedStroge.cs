@@ -17,6 +17,14 @@
 
         private BarnSeed barnSeed;
 
+        private void Update()
+        {
+            if(BarnSeed.isSowing == true || BarnSeed.isfeed == true)
+            {
+                CloseBard();
+            }
+            
+        }
 
         private void Start() {
             barnSeed = FindObjectOfType<BarnSeed>();
@@ -39,12 +47,7 @@
             beInBarnSeed = false;
         }
 
-        private void Update() {
-            if(BarnSeed.isSowing == true || BarnSeed.isfeed == true)
-            {
-                CloseBard();
-            }
-        }
+        
          public void left()
         {
 
@@ -70,4 +73,8 @@
             }
         }
     }   
+    public void UpdateSeedCount(int id, int newSeedCount)
+    {
+        seedCount[id] = newSeedCount;
+    }
 }

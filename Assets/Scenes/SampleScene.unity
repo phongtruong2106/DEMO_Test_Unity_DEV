@@ -530,7 +530,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 261.33652, y: -208.65948}
+  m_AnchoredPosition: {x: 261.33652, y: -252.6771}
   m_SizeDelta: {x: 478.7, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &73645240
@@ -1917,7 +1917,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: SeedTomaTo
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &379475087
@@ -1993,10 +1993,11 @@ MonoBehaviour:
   x_Space: 1
   z_Space: 1
   grass: {fileID: 6402677179850229704, guid: 4f793022b75e13b479420ce5577767e8, type: 3}
+  plane: {fileID: 6402677179850229704, guid: 4f793022b75e13b479420ce5577767e8, type: 3}
   currentGrid: []
   hitted: {fileID: 0}
-  gridObjects: []
   field: {fileID: 6402677179850229704, guid: b2ac532fb3a50124dba5b9143d5a8b14, type: 3}
+  gridObjects: []
   crops:
   - {fileID: 6402677179850229704, guid: fc1c7b60aa6186a4eab2dbcec7e3fcd5, type: 3}
   - {fileID: 6402677179850229704, guid: d8e0231b3c5f6d44a993167fe8437ce7, type: 3}
@@ -2005,14 +2006,14 @@ MonoBehaviour:
   - {fileID: 6402677179850229704, guid: 91f236e0de3a1624a9ccb7d8d616f5b2, type: 3}
   - {fileID: 6402677179850229704, guid: bb1ff51ff222a06428a60bd8af699c62, type: 3}
   - {fileID: 6402677179850229704, guid: 6f313aefbdb0de44db0400c765091f3d, type: 3}
-  plane: {fileID: 6402677179850229704, guid: 4f793022b75e13b479420ce5577767e8, type: 3}
-  goldSystem: {fileID: 596292978}
   seed:
   - {fileID: 6402677179850229704, guid: 91f236e0de3a1624a9ccb7d8d616f5b2, type: 3}
   - {fileID: 6402677179850229704, guid: bb1ff51ff222a06428a60bd8af699c62, type: 3}
   - {fileID: 6402677179850229704, guid: 6f313aefbdb0de44db0400c765091f3d, type: 3}
-  - {fileID: 0}
   seedStroge: {fileID: 1222611207}
+  devicefram: {fileID: 1625181403}
+  goldSystem: {fileID: 596292978}
+  barn: {fileID: 1042589757}
   gotGrid: 0
   creatingFields: 0
   harvern: 0
@@ -2488,7 +2489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 261.33652, y: -483.6595}
+  m_AnchoredPosition: {x: 261.33652, y: -527.6771}
   m_SizeDelta: {x: 478.7, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &490247021
@@ -3369,7 +3370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 583.1665, y: -396.00558}
+  m_AnchoredPosition: {x: 583.1665, y: -390.1771}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &687794164
@@ -3388,6 +3389,7 @@ MonoBehaviour:
   seed: {fileID: 0}
   animal: {fileID: 0}
   id: 1
+  seedCount: 0
   seeddCount: {fileID: 336604340}
 --- !u!114 &687794165
 MonoBehaviour:
@@ -4113,7 +4115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 765.0365, y: -208.65948}
+  m_AnchoredPosition: {x: 765.0365, y: -252.6771}
   m_SizeDelta: {x: 478.7, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &843106957
@@ -4595,7 +4597,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 219.42651, y: -396.00558}
+  m_AnchoredPosition: {x: 219.42651, y: -390.1771}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &907878285
@@ -4614,6 +4616,7 @@ MonoBehaviour:
   seed: {fileID: 0}
   animal: {fileID: 0}
   id: 0
+  seedCount: 0
   seeddCount: {fileID: 1535564709}
 --- !u!114 &907878286
 MonoBehaviour:
@@ -5815,7 +5818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 00000000010000000200000003000000
-  seedCount: 0a0000000a0000000200000001000000
+  seedCount: 0a0000000a0000000200000000000000
   numberOfSeed: 4
   pageNumber: 1
   BarnSeedWindow: {fileID: 1073059272}
@@ -6312,7 +6315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1268.7365, y: -208.65948}
+  m_AnchoredPosition: {x: 1268.7365, y: -252.6771}
   m_SizeDelta: {x: 478.7, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1382579024
@@ -6817,6 +6820,7 @@ MonoBehaviour:
   seed: {fileID: 0}
   animal: {fileID: 0}
   id: 0
+  seedCount: 0
   seeddCount: {fileID: 138556132}
 --- !u!114 &1440965058
 MonoBehaviour:
@@ -6876,7 +6880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1310.6465, y: -396.00558}
+  m_AnchoredPosition: {x: 1310.6465, y: -390.1771}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1443424561
@@ -7677,6 +7681,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ChangeSelectedobj
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SeedVietQuat
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1548695289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7881,7 +7897,7 @@ MonoBehaviour:
   devicefram: {fileID: 2075533053}
   textproductivity: {fileID: 961716098}
   upgradeButton: {fileID: 1469796936}
-  goldSystem: {fileID: 0}
+  goldSystem: {fileID: 596292978}
   numberOfFruitsUpgradeCount: 0
   UpgradePercentage: 0.1
   price: 500
@@ -9571,7 +9587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 946.9065, y: -396.00558}
+  m_AnchoredPosition: {x: 946.9065, y: -390.1771}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1885991519
@@ -9590,6 +9606,7 @@ MonoBehaviour:
   seed: {fileID: 0}
   animal: {fileID: 0}
   id: 2
+  seedCount: 0
   seeddCount: {fileID: 1122066125}
 --- !u!114 &1885991520
 MonoBehaviour:

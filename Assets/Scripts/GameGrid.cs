@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,11 @@ public class SaveData
     public List<SerializableVector3> objectPositions;
     public List<SerializableQuaternion> objectRotations;
     public List<string> objectTags;
+    public List<int> barnSeedCounts;
 
     // Thêm thông tin cụ thể của các đối tượng crops và seeds
     public List<int> cropsTypes; // Lưu thông tin về loại cây hiện tại của từng đối tượng crops
     public List<int> seedsCount; // Lưu thông tin về số lượng hạt giống của từng đối tượng seeds
-
     // Phương thức khởi tạo
     public SaveData()
     {
@@ -24,6 +25,7 @@ public class SaveData
         // Khởi tạo danh sách các thông tin cụ thể của các đối tượng crops và seeds
         cropsTypes = new List<int>();
         seedsCount = new List<int>();
+        barnSeedCounts = new List<int>();
     }
 }
 
@@ -97,6 +99,8 @@ public class GameGrid : MonoBehaviour
     [SerializeField] private GameObject devicefram;
     [SerializeField] private GameObject goldSystem;
     [SerializeField] private GameObject barn;
+    
+    
 
     [System.NonSerialized]
     public SaveData saveData;
@@ -131,6 +135,7 @@ public class GameGrid : MonoBehaviour
         }
         // Khôi phục dữ liệu các đối tượng clone sau khi đã được lưu
         LoadObjectPositions();
+        barn.GetComponent<Barn>().LoadCountProduct();
         LoadData();
     }
 
@@ -209,10 +214,10 @@ public class GameGrid : MonoBehaviour
                     }
                     
                 }
-                if(BarnSeed.isfeed == true)
+                if(BarnSeed.isfeed == true && seedStroge.GetComponent<SeedStroge>().seedCount[BarnSeed.whichSeed] > 0)
                 {
                      // Kiểm tra xem có ít nhất hai ruộng để gieo hạt giống
-                    if (_Hit.transform.tag == "Grid" && CountFields() >= 2)
+                    if (_Hit.transform.tag == "field" && CountFields() >= 2)
                     {
                         // Gieo hạt giống vào hai ruộng kề nhau
                         hitted = _Hit.transform.gameObject;
@@ -224,16 +229,16 @@ public class GameGrid : MonoBehaviour
                         ResetFields();
                     }
                 }
-                if(creatingFields == false && BarnSeed.isSowing == false&& harvern ==false && harvernmilk ==false)
-                {
-                    if(_Hit.transform.tag == "field")
-                    {
-                        hitted = _Hit.transform.gameObject;
-                        Instantiate(plane, hitted.transform.position, Quaternion.identity);
-                        Destroy(hitted);
-                        print("get crops +1"); //Update in next e
-                    }
-                }
+                // if(creatingFields == false && BarnSeed.isSowing == false&& harvern ==false && harvernmilk ==false)
+                // {
+                //     if(_Hit.transform.tag == "field")
+                //     {
+                //         hitted = _Hit.transform.gameObject;
+                //         Instantiate(plane, hitted.transform.position, Quaternion.identity);
+                //         Destroy(hitted);
+                //         print("get crops +1"); //Update in next e
+                //     }
+                // }
                
             }
         }
@@ -324,9 +329,9 @@ public class GameGrid : MonoBehaviour
     {
         fieldsCount = 0;
     }
-
     private void OnApplicationQuit()
     {
+        barn.GetComponent<Barn>().SaveCountProduct();
         // Lưu dữ liệu các đối tượng
         SaveData();
         SaveObjectPositions();
@@ -359,14 +364,24 @@ public class GameGrid : MonoBehaviour
                         saveData.cropsTypes.Add(cropType);
                     }
                 }
-                else if (obj.CompareTag("Seed"))
+                 else if (obj.CompareTag("Seed"))
                 {
                     Seed seedComponent = obj.GetComponent<Seed>();
                     if (seedComponent != null)
                     {
-                        // Lưu thông tin về số lượng hạt giống của từng đối tượng seeds
-                        int seedCount = seedComponent.cropType;
-                        saveData.seedsCount.Add(seedCount);
+                        // Save the seedType of the Seed object
+                        int seedType = seedComponent.seedType;
+                        saveData.seedsCount.Add(seedType);
+                    }
+                }
+                else if (obj.CompareTag("Animal"))
+                {
+                    Animal animalComponent = obj.GetComponent<Animal>();
+                    if (animalComponent != null)
+                    {
+                        // Save the seedType of the Seed object
+                        int animal = animalComponent.animalType;
+                        saveData.seedsCount.Add(animal);
                     }
                 }
             }
@@ -402,12 +417,29 @@ public class GameGrid : MonoBehaviour
                 }
                 else if (saveData.objectTags[i] == "Seed")
                 {
-                    // Tạo đối tượng Seed
-                    int seedCount = saveData.seedsCount[i]; // Lấy thông tin số lượng hạt giống của đối tượng Seed
-                    int seedType = 0; // Lấy thông tin loại hạt giống (nếu có)
+                    // Load the seedType from SaveData
+                    int seedType = saveData.seedsCount[i];
+
+                    // Check if the seedType is within the valid range for the seend array
                     if (seedType >= 0 && seedType < seend.Length)
+                    {
+                        // Get the corresponding seed prefab from the seend array based on seedType
                         prefab = seend[seedType];
+                    }
                 }
+                else if (saveData.objectTags[i] == "Animal")
+                {
+                    // Load the seedType from SaveData
+                    int animalType = saveData.seedsCount[i];
+
+                    // Check if the seedType is within the valid range for the seend array
+                    if (animalType >= 0 && animalType < seend.Length)
+                    {
+                        // Get the corresponding seed prefab from the seend array based on seedType
+                        prefab = seend[animalType];
+                    }
+                }
+                
 
                 // Nếu có Prefab tương ứng, tạo đối tượng và gán thông tin vị trí và quay
                 if (prefab != null)
@@ -420,12 +452,16 @@ public class GameGrid : MonoBehaviour
 
     private void LoadData()
     {
-         // Đọc giá trị gold từ PlayerPrefs và gán vào biến gold của GoldSystem
+        // Đọc giá trị gold từ PlayerPrefs và gán vào biến gold của GoldSystem
         int gold = PlayerPrefs.GetInt("Gold", 0);
         goldSystem.GetComponent<GoldSystem>().gold = gold;
         int deviceFram = PlayerPrefs.GetInt("DeviceFram", 0);
-        string jsonSeedCount = PlayerPrefs.GetString("SeedCount", "");
-        seedStroge.GetComponent<SeedStroge>().seedCount = JsonUtility.FromJson<int[]>(jsonSeedCount);
+        devicefram.GetComponent<framDevice>().numberOfFruitsUpgradeCount = deviceFram;
+        for (int i = 0; i < seedStroge.GetComponent<SeedStroge>().seedCount.Length; i++)
+        {
+            seedStroge.GetComponent<SeedStroge>().seedCount[i] = PlayerPrefs.GetInt("SeedCount_" + i, 0);
+        }
+
     }
     
     private void SaveData()
@@ -434,11 +470,13 @@ public class GameGrid : MonoBehaviour
         PlayerPrefs.SetInt("CreatingFields", creatingFields ? 1 : 0);
         PlayerPrefs.SetInt("Harvern", harvern ? 1 : 0);
         PlayerPrefs.SetInt("Gold", goldSystem.GetComponent<GoldSystem>().gold);
-        PlayerPrefs.SetInt("DeviceFram", devicefram.GetComponent<framDevice>().numberOfFruitsUpgradeCount);
-    
-        string jsonSeedCount = JsonUtility.ToJson(barn.GetComponent<SeedStroge>().seedCount);
-        PlayerPrefs.SetString("SeedCount", jsonSeedCount);
-     
+        PlayerPrefs.SetInt("DeviceFram", devicefram.GetComponent<framDevice>().numberOfFruitsUpgradeCount);  
+        for (int i = 0; i < seedStroge.GetComponent<SeedStroge>().seedCount.Length; i++)
+        {
+            PlayerPrefs.SetInt("SeedCount_" + i, seedStroge.GetComponent<SeedStroge>().seedCount[i]);
+        }
+        
+        
     }
     public void DeleteSavedData()
     {
@@ -446,6 +484,8 @@ public class GameGrid : MonoBehaviour
         PlayerPrefs.DeleteKey("CreatingFields");
         PlayerPrefs.DeleteKey("Harvern");
         PlayerPrefs.DeleteKey("ObjectData"); // Delete the saved object data
+        PlayerPrefs.DeleteKey("Gold");
+        PlayerPrefs.DeleteAll();
         // Display a message or perform any other actions to indicate that the data was deleted
         Debug.Log("Saved data deleted!");
     }

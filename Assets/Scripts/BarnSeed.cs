@@ -9,7 +9,7 @@ public class BarnSeed : MonoBehaviour
     [SerializeField] private GameObject seed;
     [SerializeField] private GameObject animal;
     public int id;
-    public static int seedCount; // Số lượng cây trồng trong nhà kho
+    public int seedCount; // Số lượng cây trồng trong nhà kho
 
     public Text seeddCount; // Thêm đối tượng Text để hiển thị số lượng cây trồng
     public static bool placeSeeds;
@@ -20,6 +20,7 @@ public class BarnSeed : MonoBehaviour
     public static int currentSeedCount;
     private int purchaseAmount; 
     private static int selectedSeedId;
+    
     private void Start()
     {
         seedStroge = GameObject.Find("Seed Stroge");
@@ -30,6 +31,7 @@ public class BarnSeed : MonoBehaviour
         seedCount = seedStroge.GetComponent<SeedStroge>().seedCount[id]; // Cập nhật giá trị seedCount từ SeedStroge
         seeddCount.text = seedCount.ToString(); // Hiển thị số lượng cây trồng lên Text
         purchaseAmount = seedCount;
+        seedStroge.GetComponent<SeedStroge>().UpdateSeedCount(id, seedCount);
     }
     public void Plant()
     {    
